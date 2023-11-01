@@ -1,0 +1,43 @@
+const urso = document.querySelector('.urso')
+const brick = document.querySelector('.brick')
+
+
+const jump = () => {
+    urso.classList.add('jump')
+
+    setTimeout( () => (
+
+        urso.classList.remove('jump')
+
+
+    ) , 500)
+}
+const loop = setInterval(() => {
+
+    console.log('loop')
+
+    const brickPosition = brick.offsetLeft;
+    const ursoPosition = +window.getComputedStyle(urso).bottom.replace('px', '');
+
+    console.log(ursoPosition)
+
+
+    if (brickPosition <= 120 &&  brickPosition > 0 && ursoPosition < 80 ) {
+
+        brick.style.animation = 'none'
+        brick.style.left = `${ursoPosition}px`
+
+        urso.style.animation = 'none'
+        urso.style.bottom = `${ursoPosition}px`
+
+        urso.src = 'cavera.gif'
+        urso.style.width = '250px'
+        urso.style.marginRight = '30px'
+
+
+       clearInterval(loop)
+    }
+
+}, 10)
+
+document.addEventListener('keydown', jump)
